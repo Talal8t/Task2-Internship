@@ -1,0 +1,28 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Task2_Internship.Entities;
+using Task2_Internship.Services.Interfaces;
+
+namespace Task2_Internship.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    [Authorize(Roles = UserRoles.Admin)]
+    public class DashboardController : ControllerBase
+    {
+        private readonly IDashboardService _dashboardService;
+
+        public DashboardController(IDashboardService dashboardService)
+        {
+            _dashboardService = dashboardService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDashboard()
+        {
+            var dashboard = await _dashboardService.GetDashboardAsync();
+
+            return Ok(dashboard);
+        }
+    }
+}

@@ -1,0 +1,154 @@
+@Task2_Internship_HostAddress = http://localhost:5159
+
+
+##################################################
+### AUTH
+##################################################
+
+### Register Customer
+POST {{Task2_Internship_HostAddress}}/api/auth/register-customer
+Content-Type: application/json
+
+{
+  "fullName": "Ali Khan",
+  "email": "ali@gmail.com",
+  "contactNumber": "03001234567",
+  "password": "Ali@123"
+}
+
+###
+
+### Login
+POST {{Task2_Internship_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "ali@gmail.com",
+  "password": "Ali@123"
+}
+
+###
+
+##################################################
+### USER PROFILE
+##################################################
+
+### Get Profile
+GET {{Task2_Internship_HostAddress}}/api/user/profile
+Authorization: Bearer {{token}}
+
+###
+
+### Update Profile
+PUT {{Task2_Internship_HostAddress}}/api/user/profile
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "fullName": "Ali Khan Updated",
+  "contactNumber": "03111234567"
+}
+
+###
+
+##################################################
+### TICKETS
+##################################################
+
+### Create Ticket
+POST {{Task2_Internship_HostAddress}}/api/tickets
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Unable to Login",
+  "description": "I cannot login to my account."
+}
+
+###
+
+### Get My Tickets
+GET {{Task2_Internship_HostAddress}}/api/tickets
+Authorization: Bearer {{token}}
+
+###
+
+### Get Ticket By Id
+GET {{Task2_Internship_HostAddress}}/api/tickets/{{ticketId}}
+Authorization: Bearer {{token}}
+
+###
+
+### Update Ticket
+PUT {{Task2_Internship_HostAddress}}/api/tickets/{{ticketId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Unable to Login - Updated",
+  "description": "Still unable to login after password reset."
+}
+
+###
+
+### Assign Ticket (Admin)
+PUT {{Task2_Internship_HostAddress}}/api/tickets/assign
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "ticketId": "{{ticketId}}",
+  "agentId": "{{agentId}}"
+}
+
+###
+
+### Update Ticket Status
+PUT {{Task2_Internship_HostAddress}}/api/tickets/status
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "ticketId": "{{ticketId}}",
+  "status": "Resolved"
+}
+
+###
+
+### Search Tickets
+GET {{Task2_Internship_HostAddress}}/api/tickets/search?status=Open&title=Login
+Authorization: Bearer {{token}}
+
+###
+
+##################################################
+### REPLIES
+##################################################
+
+### Add Reply
+POST {{Task2_Internship_HostAddress}}/api/replies
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "ticketId": "{{ticketId}}",
+  "message": "We are currently investigating your issue."
+}
+
+###
+
+### Get Replies
+GET {{Task2_Internship_HostAddress}}/api/replies/{{ticketId}}
+Authorization: Bearer {{token}}
+
+###
+
+##################################################
+### DASHBOARD
+##################################################
+
+### Dashboard Statistics (Admin)
+GET {{Task2_Internship_HostAddress}}/api/dashboard
+Authorization: Bearer {{adminToken}}
+
+###
